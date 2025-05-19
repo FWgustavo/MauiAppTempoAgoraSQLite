@@ -9,6 +9,8 @@ namespace MauiAppTempoAgoraSQLite.Models
 {
     public class Tempo
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public double? lon { get; set; }
         public double? lat { get; set; }
         public double? temp_min { get; set; }

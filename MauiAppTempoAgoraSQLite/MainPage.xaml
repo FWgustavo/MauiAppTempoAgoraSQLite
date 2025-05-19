@@ -7,14 +7,42 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-
-
             <Entry x:Name="txt_cidade" />
             <Button Text="Buscar Previsão" x:Name="Previsao" Clicked="Previsao_Clicked"/>
 
             <Label x:Name="lbl_res" />
 
-            <WebView x:Name="wv_mapa" HeightRequest="500" />
+            <ListView x:Name="lst_produtos"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="lst_produtos_Refreshing"
+                      ItemSelected="lst_produtos_ItemSelected">
+                <ListView.Header>
+                    <Grid ColumnDefinitions="30,100,80,50,90"
+                          BackgroundColor="{StaticResource Gray100}">
+                        <Label Grid.Column="0" Text="Data" Padding="5" FontAttributes="Bold"/>
+                        <Label Grid.Column="1" Text="Cidade" FontAttributes="Bold"/>
+                        <Label Grid.Column="2" Text="Temperatura" FontAttributes="Bold"/>
+                        <Label Grid.Column="3" Text="Previsão" FontAttributes="Bold"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                            </ViewCell.ContextActions>
+                            <Grid ColumnDefinitions="30,100,80,50,90">
+                                <Label Grid.Column="0" Text="{Binding }" Padding="5"/>
+                                <Label Grid.Column="1" Text="{Binding Descricao}"/>
+                                <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}"/>
+                                <Label Grid.Column="3" Text="{Binding Quantidade}"/>
+                                <Label Grid.Column="4" Text="{Binding Total, StringFormat='{}{0:c}'}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
 
         </VerticalStackLayout>
     </ScrollView>
